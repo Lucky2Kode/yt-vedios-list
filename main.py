@@ -155,6 +155,9 @@ def prompt_count() -> int | None:
 
 def main(url: str, limit: int | None) -> int:
     DOWNLOADS_DIR.mkdir(exist_ok=True)
+    for f in DOWNLOADS_DIR.iterdir():
+        if f.name != ".gitkeep":
+            f.unlink()
 
     label = "all videos" if limit is None else f"latest {limit} video(s)"
     print(f"Fetching {label} from: {url}")
